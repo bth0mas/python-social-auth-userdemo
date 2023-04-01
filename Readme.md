@@ -331,6 +331,6 @@ hope you found it useful!
 [personalized config]: https://python-social-auth.readthedocs.io/en/latest/configuration/django.html#personalized-configuration
 [pipeline doc]: https://python-social-auth.readthedocs.io/en/latest/pipeline.html
 [understanding pipeline]: https://python-social-auth.readthedocs.io/en/latest/developer_intro.html#understanding-the-pipeline
-[understanding PSA URLs]: https://python-social-auth.readthedocs.io/en/latest/developer_intro.html#understanding-psa-urls)
+[understanding PSA URLs]: https://python-social-auth.readthedocs.io/en/latest/developer_intro.html#understanding-psa-urls
 [PSA on GitHub]: https://github.com/python-social-auth/
 [PSA examples]: https://github.com/python-social-auth/social-examples
