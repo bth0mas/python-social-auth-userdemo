@@ -1,0 +1,15 @@
+
+.form-row {
+    word-break: break-all;
+}
+
+.inline-group .tabular td.original {
+    word-break: break-all;
+}
+
+.inline-group .tabular td.original p {
+    word-break: break-all;
+    font-size: 13px;
+    font-weight: normal;
+    /* line-height: 1.1; */
+}

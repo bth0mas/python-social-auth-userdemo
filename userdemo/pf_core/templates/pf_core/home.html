@@ -1,0 +1,68 @@
+
+{% extends "base_generic.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="jumbotron">
+  
+  {% if not user.is_authenticated %}
+
+  <h1>Social Authentication demo</h1>
+  
+  <p class="lead">You are not authenticated</p>
+  
+  {% else %}
+    
+  <h2>Welcome {{ user.get_short_name }}!</h2>
+
+  {% if user.avatar %}
+  <p>
+    <img src="{{ user.avatar }}"
+         class="rounded-circle align-self-center mr-2 avatar">
+  </p>
+  {% endif %}
+
+  <p>username: {{ user.get_username }};
+    full name: {{ user.get_full_name }};
+    email: {{ user.email }}</p>
+
+  <p>
+    <ul>
+      {% for sau in pf_core.sa_users %}
+      <li>{{ sau.user }}
+        {{ sau.provider }}
+        {{ sau.uid }}
+        {{ sau.created | date:"Y-m-d" }}T{{ sau.created | time:"H:i:s" }}
+        {{ sau.extra_data }}</li>
+      {% endfor %}
+    </ul>
+  </p>
+
+  {% endif %}
+
+  <p>
+    <a href="{% url 'social:begin' 'microsoft-graph' %}"
+       class="btn btn-primary btn-lg m-3
+              {% if 'microsoft-graph' in pf_core.sa_providers %}
+              disabled
+              {% endif %}
+              " role="button">
+        Login (Microsoft)
+    </a>
+
+    <a href="{% url 'social:begin' 'azuread-oauth2' %}"
+       class="btn btn-primary btn-lg m-3
+              {% if 'azuread-oauth2' in pf_core.sa_providers %}
+              disabled
+              {% endif %}
+              " role="button">
+        Login (Azure AD)
+    </a>
+
+  </p>
+  
+</div>
+
+{% endblock %}

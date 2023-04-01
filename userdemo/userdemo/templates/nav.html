@@ -1,0 +1,44 @@
+
+
+<nav class="navbar navbar-expand-sm bg-light fixed-top" role="navigation">
+
+  <div class="container-fluid">
+    
+    <div class="navbar-header">
+      {% comment %}
+      {# This requires more resources such as Bootstrap JS #}
+      <button class="navbar-toggler" type="button"
+              data-toggle="collapse" data-target="#navbarCollapse"
+              aria-controls="navbarCollapse" aria-expanded="false"
+              aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+      </button>
+      {% endcomment %}
+      <a href="{% url 'home' %}" class="navbar-brand">Social Auth Demo</a>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+	
+        <li class="nav-item">
+          <a href="{% url 'home' %}" class="nav-link {% spaceless %}
+          {% if request.resolver_match.view_name == 'home' %} 
+	  active {% endif %}{% endspaceless %}">Home</a>
+        </li>
+
+      </ul>
+	
+      {# ##### right-hand-side entry - logout button ##### #}
+      
+      <ul class="navbar-nav justify-content-end">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a href="{% url 'logout' %}"
+	     class="dropdown-item">Sign Out</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  
+</nav>

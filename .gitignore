@@ -1,0 +1,32 @@
+
+##----------------------------------------------------------------------------
+## Specific to this project
+
+# any directory of this form is temp and may contain username / password
+/[0-9][0-9]-*
+
+##------------------------------------
+## Django-specific
+
+db.sqlite3
+migrations
+
+##----------------------------------------------------------------------------
+## Standard exceptions
+
+# ignore normal Emacs work stuff
+*~
+\#*\#
+.\#*
+
+# MacOS stuff
+.DS_Store
+
+##------------------------------------
+## Standard Python exceptions - and mine
+
+__pycache__
+*.pyc
+
+# Python VirtualEnv library
+__venv__

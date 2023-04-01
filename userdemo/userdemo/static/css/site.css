@@ -1,0 +1,30 @@
+
+/* general */
+
+body {
+    padding-top: 4em;
+}
+
+.alert-pre {
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
+/* nav bar */
+
+.avatar {
+    width: 32px;
+}
+
+/* misc attributes */
+
+.attr_inactive {
+    color: #D0D0D0;
+}
+
+.attr_valid {
+    color: green;
+}
+
+

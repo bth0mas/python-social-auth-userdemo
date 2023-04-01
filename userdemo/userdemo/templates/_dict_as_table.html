@@ -1,0 +1,26 @@
+
+{% extends "base_generic.html" %}
+
+{% load static %}
+
+{% block content %}
+<h1>{{ page_title }}</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Key</th>
+      <th scope="col">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if dict_to_display %}
+      {% for k,v in dict_to_display.items %}
+        <tr>
+          <td>{{ k }}</td>
+          <td style="word-break: break-all">{{ v }}</td>
+        </tr>
+      {% endfor %}
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}
