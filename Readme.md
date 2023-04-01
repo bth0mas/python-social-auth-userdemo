@@ -193,7 +193,8 @@ AUTHENTICATION_BACKENDS = (
 ```
 
 (in the final demo package, I twicked `settings.py` to use
-`os.environ` and a pair of environmental variables)
+`os.environ` and the pair of environmental variables I described in
+the above "First step" section.)
 
 Don't forget to add the default Django backend at the end, so that you
 can still use the login/password of your superuser.
@@ -249,7 +250,9 @@ At this stage, you have and operational test platform: log in with
 Simply add the relevant `SOCIAL_AUTH_...` variables in `settings.py`,
 as well as the backend declaration. And that's about it.
 
-
+In the code, I added `azuread-oauth2`, which is a bit of a redundant,
+alternate path to the same application, as a test; feel free to adapt
+to any other provider, it should be quite easy.
 
 ## Pipeline
 
@@ -329,5 +332,5 @@ hope you found it useful!
 [pipeline doc]: https://python-social-auth.readthedocs.io/en/latest/pipeline.html
 [understanding pipeline]: https://python-social-auth.readthedocs.io/en/latest/developer_intro.html#understanding-the-pipeline
 [understanding PSA URLs]: https://python-social-auth.readthedocs.io/en/latest/developer_intro.html#understanding-psa-urls)
-[PSA on Github]: https://github.com/python-social-auth/
+[PSA on GitHub]: https://github.com/python-social-auth/
 [PSA examples]: https://github.com/python-social-auth/social-examples
