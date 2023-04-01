@@ -1,22 +1,48 @@
 
 # A tutorial to `social-auth-app-django`
 
-[`python-social-auth`](https://github.com/python-social-auth/) is a
-powerful set of modules to give developers easy access to many
-authentication platforms for their projects.
+[`python-social-auth`][python-social-auth] is a powerful set of
+modules to give developers easy access to many authentication
+platforms for their projects.
 
 However, I found the initial contact not so easy - this is why I
 started to experiment "from scratch", and wrote this tutorial
 alongside.
 
 The purpose is to setup the initial steps of a
-from-scratch [Django](https://www.djangoproject.com/) 
-project, to allow integration of social-based authentication to your
-site. The project will stop at login / logout / hello-world kind of
-stage.
+from-scratch [Django][Django home] project, to allow integration of
+social-based authentication to your site. The project will stop at
+login / logout / hello-world kind of stage.
+
+## How to quickly use this project
+
+Download and unzip, or clone.
+
+Set the requirements with a `pip install -r requirements.txt` -
+preferably in a virtual environment.
+
+Connect to the [Microsoft portal][Microsoft portal], and
+declare an application, with two callback points:
+`http://localhost:8000/complete/microsoft-graph` and
+`http://localhost:8000/complete/azuread-oauth2`.
+
+With the app key and secret, set the following two env vars:
+`SOCIAL_AUTH_MICROSOFT_GRAPH_KEY` and
+`SOCIAL_AUTH_MICROSOFT_GRAPH_SECRET`.
+
+Then:
+
+``` shell
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver 8000
+```
+
+and you are good to go with a browser.
 
 
-# `userdemo` project
+# Building the `userdemo` project
 
 It all started with:
 
@@ -26,11 +52,10 @@ django-admin startproject userdemo
 
 ## First step: always start with deriving the User model
 
-It is recommended in the 
-[Django doc](https://docs.djangoproject.com/en/4.0/topics/auth/customizing/#substituting-a-custom-user-model),
-where you will find instructions to do so. The point is to create a
-custom User model *before* to apply the first migration; doing it
-later exposes you to painful manual data migration.
+It is recommended in the [Django doc][Django custom user model], where
+you will find instructions to do so. The point is to create a custom
+User model *before* to apply the first migration; doing it later
+exposes you to painful manual data migration.
 
 So you create an app:
 
@@ -127,9 +152,9 @@ compte "superuser" créé plus haut.
 
 ## At last - authentication!
 
-The purpose is to illustrate in practice the information found in [Configuration](https://python-social-auth.readthedocs.io/en/latest/configuration/settings.html) and
-[Django Framework](https://python-social-auth.readthedocs.io/en/latest/configuration/django.html),
-in the modules.
+The purpose is to illustrate in practice the information found
+in [Configuration][PSA configuration settings]
+and [Django Framework][Django configuration], in the modules.
 
 In `settings.py`, add:
 
@@ -185,7 +210,7 @@ urlpatterns = [
 ```
 
 You need to add to your app declaration in
-the [Microsoft portal](https://portal.azure.com/) with a return URL
+the [Microsoft portal][Microsoft portal] with a return URL
 `http://localhost:8000/complete/microsoft-graph` - reading the code
 content in `social_django.urls`, you can understand why:
 
@@ -228,13 +253,9 @@ as well as the backend declaration. And that's about it.
 
 ## Pipeline
 
-In the
-[personalized configuration doc](https://python-social-auth.readthedocs.io/en/latest/configuration/django.html#personalized-configuration),
-the 
-[pipeline doc](https://python-social-auth.readthedocs.io/en/latest/pipeline.html),
-and
-in
-[pipeline paragraph of introduction doc](https://python-social-auth.readthedocs.io/en/latest/developer_intro.html#understanding-the-pipeline),
+In the [personalized configuration doc][personalized config],
+the [pipeline doc][pipeline doc], and
+in [pipeline paragraph of introduction doc][understanding pipeline],
 you'll find nearly all you need to know about pipelines.
 
 The thing to keep in mind: they play kind of the same role as the
@@ -264,7 +285,8 @@ and the matching declaration in `pf_core.context_processors`, and we
 are good to go and tune templates to allow login and logout
 operations. 
 
-For login, we follow the method described in [understanding PSA URLs](https://python-social-auth.readthedocs.io/en/latest/developer_intro.html#understanding-psa-urls): 
+For login, we follow the method described
+in [understanding PSA URLs][understanding PSA URLs]:
 
 ``` html
 <a href="{% url 'social:begin' 'provider-name' %}">Login</a>
@@ -282,7 +304,30 @@ The various urls of the `social` domain name are set in
 * `disconnect_individual`: not tested
 
 
-
 For logout, very simple: call the `django.contrib.auth.logout`
 function in a view, clean up the `request` object, and redirect to the
 home page. See code.
+
+
+# How to go further
+
+You should now have sufficient understanding of
+how [`python-social-auth`][PSA on GitHub] works, to read
+the [examples][PSA examples], and adapt and use them. I personnaly
+found the Django one quite interesting, but a bit difficult to start
+from, so I wanted to start from scratch and wrote this tutorial. I
+hope you found it useful!
+
+
+[python-social-auth]: https://github.com/python-social-auth/
+[Django home]: https://www.djangoproject.com/
+[Django custom user model]: https://docs.djangoproject.com/en/4.0/topics/auth/customizing/#substituting-a-custom-user-model
+[Django configuration]: https://python-social-auth.readthedocs.io/en/latest/configuration/django.html
+[Microsoft portal]: https://portal.azure.com/
+[PSA configuration settings]: https://python-social-auth.readthedocs.io/en/latest/configuration/settings.html
+[personalized config]: https://python-social-auth.readthedocs.io/en/latest/configuration/django.html#personalized-configuration
+[pipeline doc]: https://python-social-auth.readthedocs.io/en/latest/pipeline.html
+[understanding pipeline]: https://python-social-auth.readthedocs.io/en/latest/developer_intro.html#understanding-the-pipeline
+[understanding PSA URLs]: https://python-social-auth.readthedocs.io/en/latest/developer_intro.html#understanding-psa-urls)
+[PSA on Github]: https://github.com/python-social-auth/
+[PSA examples]: https://github.com/python-social-auth/social-examples
